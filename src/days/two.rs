@@ -29,28 +29,30 @@ fn assess_commands(data: Vec<String>) -> i32 {
         return -1;
     }
 
-    let mut horizontal_progress = 0;
-    let mut vertical_progress = 0;
+    let mut current_aim = 0;
+    let mut horizontal_position = 0;
+    let mut depth = 0;
 
     for c in commands {
         if let Ok(command) = c {
             match command {
                 SubmarineCommand::Horizontal(value) => {
-                    horizontal_progress += value;
+                    horizontal_position += value;
+                    depth += current_aim * value;
                 }
                 SubmarineCommand::Vertical(value) => {
-                    vertical_progress += value;
+                    current_aim += value;
                 }
             }
         }
     }
 
-    let product = horizontal_progress * vertical_progress;
+    let product = horizontal_position * depth;
     println!(
         "The horizontal progress is {}",
-        horizontal_progress.to_string()
+        horizontal_position.to_string()
     );
-    println!("The vertical progress is {}", vertical_progress);
+    println!("The vertical progress is {}", depth);
     println!("The answer is {}", product.to_string());
 
     product
@@ -91,7 +93,7 @@ mod tests {
                 "down 8".to_string(),
                 "forward 2".to_string(),
             ]),
-            150
+            900
         );
     }
 }
