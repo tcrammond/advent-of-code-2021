@@ -23,6 +23,7 @@ fn main() {
     match day.replace("\n", "").as_str() {
         "1" => one::run(),
         "2" => two::run(),
+        "3" => three::run(),
         _ => println!("That isn't available yet"),
     }
 }
